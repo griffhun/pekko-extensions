@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+package StreamFromDB {
+ rectangle Start
+ rectangle Merge
+ rectangle dbLoaderFlow
+ rectangle messageBroadcaster
+ rectangle nextIdExtractor
+}
+() out
+
+Start -> Merge: start fromId
+Merge -> dbLoaderFlow: fromId
+dbLoaderFlow -> messageBroadcaster
+messageBroadcaster -down-> nextIdExtractor: Message
+messageBroadcaster -> out: Message
+nextIdExtractor -> Merge: continue fromId
+
+@enduml
