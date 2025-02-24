@@ -1,4 +1,4 @@
-package com.github.griffhun.pekko.extensions
+package com.github.griffhun.pekko.example.postgres
 
 import org.apache.pekko.NotUsed
 import org.apache.pekko.actor.ActorSystem

@@ -16,12 +16,11 @@ object Dependencies {
   }
 
   object Testing {
-    val mUnit = "org.scalameta" %% "munit" % "1.0.0" % Test
     val scalaTest = "org.scalatest" %% "scalatest" % "3.2.19" % Test
     val scalaTestPlus = "org.scalatestplus" %% "scalacheck-1-16" % "3.2.14.0" % Test
     val scalaMock = "org.scalamock" %% "scalamock" % "6.2.0" % Test
 
-    val all = Seq(mUnit, scalaTest, scalaTestPlus, scalaMock)
+    val all = Seq(scalaTest, scalaTestPlus, scalaMock)
   }
 
 

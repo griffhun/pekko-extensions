@@ -1,4 +1,4 @@
-package com.github.griffhun.pekko.extensions
+package com.github.griffhun.pekko.example.postgres
 
 import org.testcontainers.containers.PostgreSQLContainer
 import slick.jdbc.JdbcBackend

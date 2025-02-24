@@ -1,8 +1,8 @@
-package com.github.griffhun.pekko.extensions
+package com.github.griffhun.pekko.example.postgres
 
 import org.apache.pekko.NotUsed
-import org.apache.pekko.stream.{FlowShape, Graph, SourceShape}
 import org.apache.pekko.stream.scaladsl.*
+import org.apache.pekko.stream.{FlowShape, Graph, SourceShape}
 
 import java.util.concurrent.atomic.AtomicReference
 import scala.concurrent.duration.*
@@ -15,7 +15,7 @@ object Message {
 }
 
 object StreamFromDB {
-  import GraphDSL.Implicits._
+  import GraphDSL.Implicits.*
 
   /**
    * Provide continuous Source for streaming data from the provided data source from the provided ID: fromId.
