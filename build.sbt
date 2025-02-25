@@ -16,7 +16,7 @@ lazy val examplePostgres = project
   .settings(
     name := "example-postgres",
     scalaVersion := scala3Version,
-    libraryDependencies ++= Pekko.all ++ Testing.all ++ Postgres.all ++ TestContainers.all
+    libraryDependencies ++= Pekko.all ++ Testing.all ++ Postgres.all ++ TestContainers.all ++ Logback.all
   ).dependsOn(extensions)
 
 lazy val root = (project in file("."))

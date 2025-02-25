@@ -42,7 +42,7 @@ class StreamFromDBSpec extends AsyncWordSpec with Matchers {
 
   "StreamFromDBSpec" when {
     "started" should {
-      "stream from the db continously" in {
+      "stream from the db continuously" in {
         val usernames = generateUserNames(100)
         val saveStreamF = Source
           .fromIterator(() => usernames.iterator)

@@ -1,6 +1,12 @@
 import sbt.*
 object Dependencies {
 
+  object Logback {
+    val logback = "ch.qos.logback" % "logback-classic" % "1.5.17"
+
+    val all = Seq(logback)
+  }
+
   object Pekko {
     val version = "1.1.2"
     val pekkoStream = "org.apache.pekko" %% "pekko-stream" % version

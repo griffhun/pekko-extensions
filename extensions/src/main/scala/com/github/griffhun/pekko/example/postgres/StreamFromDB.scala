@@ -7,11 +7,11 @@ import org.apache.pekko.stream.{FlowShape, Graph, SourceShape}
 import java.util.concurrent.atomic.AtomicReference
 import scala.concurrent.duration.*
 
-sealed trait Message[ID, T]
+sealed trait Message[+ID, +T]
 
 object Message {
-  final case class Loaded[ID, T](id: ID, data: T) extends Message[ID, T]
-  final case class KeepAlive[ID, T]() extends Message[ID, T]
+  final case class Loaded[+ID, +T](id: ID, data: T) extends Message[ID, T]
+  case object KeepAlive extends Message[Nothing, Nothing]
 }
 
 object StreamFromDB {
@@ -56,7 +56,7 @@ object StreamFromDB {
           Flow[ID].flatMapConcat(id =>
             dataSource(id)
               .map(t => Message.Loaded(idExtractor(t), t))
-              .concat(Source.single(Message.KeepAlive[ID, T]())))
+              .concat(Source.single(Message.KeepAlive)))
         )
         // Important: eagerCancel=true make sure the stream stops when the actual downstream is cancelled
         val messageBroadcaster = builder.add(Broadcast[Message[ID, T]](2, eagerCancel = true))
@@ -73,7 +73,7 @@ object StreamFromDB {
                   (id, false)
                 case Message.Loaded(_, _) =>
                   (agg, false)
-                case Message.KeepAlive() =>
+                case Message.KeepAlive =>
                   (agg, true)
               },
             harvest = identity,
