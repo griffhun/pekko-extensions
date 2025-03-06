@@ -1,29 +1,27 @@
 import Dependencies.{Pekko, *}
 import sbt.Keys.libraryDependencies
 
-val scala3Version = "3.6.3"
+ThisBuild / organization := "com.github.griffhun.pekko"
+ThisBuild / version      := "0.1.0-SNAPSHOT"
+ThisBuild / scalaVersion := "3.6.3"
 
-lazy val extensions = project
-  .in(file("extensions"))
+lazy val dbStreamer = project
+  .in(file("extensions/db-streamer"))
   .settings(
-    name := "pekko-extensions",
-    scalaVersion := scala3Version,
+    name := "db-streamer",
     libraryDependencies ++= Pekko.all ++ Testing.all
   )
 
-lazy val examplePostgres = project
-  .in(file("example-postgres"))
+lazy val exampleDbStreamerPostgres = project
+  .in(file("examples/db-streamer-postgres"))
   .settings(
-    name := "example-postgres",
-    scalaVersion := scala3Version,
+    name := "db-streamer-postgres",
     libraryDependencies ++= Pekko.all ++ Testing.all ++ Postgres.all ++ TestContainers.all ++ Logback.all
-  ).dependsOn(extensions)
+  ).dependsOn(dbStreamer)
 
 lazy val root = (project in file("."))
-  .aggregate(extensions, examplePostgres)
+  .aggregate(dbStreamer, exampleDbStreamerPostgres)
   .settings(
     name := "pekko-extensions-root",
-    version := "0.1.0-SNAPSHOT",
-    scalaVersion := scala3Version
   )
 
