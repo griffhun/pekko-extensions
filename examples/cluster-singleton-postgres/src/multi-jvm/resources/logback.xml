@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true" scanPeriod="3 seconds">
+
+    <logger name="org.apache.pekko" level ="INFO"/>
+    <logger name="sample" level="DEBUG" />
+    <logger name="com.github.griffhun" level="DEBUG" />
+
+
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+<!--            <pattern>-->
+<!--                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n-->
+<!--            </pattern>-->
+            <pattern>
+                %d{HH:mm:ss.SSS} %logger{32} %-5level %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="STDOUT" />
+    </appender>
+
+    <root>
+        <level value="WARN"/>
+        <appender-ref ref="ASYNC"/>
+    </root>
+</configuration>

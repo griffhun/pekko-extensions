@@ -1,17 +1,13 @@
 import sbt.*
 object Dependencies {
 
-  object Logback {
-    val logback = "ch.qos.logback" % "logback-classic" % "1.5.17"
-
-    val all = Seq(logback)
-  }
-
   object Pekko {
     val version = "1.1.2"
     val pekkoStream = "org.apache.pekko" %% "pekko-stream" % version
     val pekkoStreamTestKit = "org.apache.pekko" %% "pekko-stream-testkit" % version % Test
-    val all = Seq(pekkoStream, pekkoStreamTestKit)
+    val cluster = "org.apache.pekko" %% "pekko-cluster-typed" % version
+    val stream = Seq(pekkoStream, pekkoStreamTestKit)
+    val all = stream ++ Seq(cluster)
   }
 
   object Postgres {
@@ -34,6 +30,13 @@ object Dependencies {
     val scalatest = "com.dimafeng" %% "testcontainers-scala-scalatest" % "0.41.8" % Test
     val postgres = "org.testcontainers" % "postgresql" % "1.20.5" % Test
     val all = Seq(scalatest, postgres)
+  }
+
+  object Logging {
+    val logback = "ch.qos.logback" % "logback-classic" % "1.5.17"
+    val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5"
+
+    val all = Seq(logback, scalaLogging)
   }
 
 }
